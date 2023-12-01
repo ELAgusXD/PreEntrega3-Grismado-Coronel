@@ -4,18 +4,16 @@ import {ItemList} from '../ItemList/ItemList'
  import {Productos} from '../../data/data'
 import {useParams} from 'react-router-dom'
 import {Loader} from '../Loader/Loader'
-import {collection, getDocs} from "firebase/firestore";
-import {db} from '../../utils/firebase'
 
-
-export const ItemListContainer = ({title}) => {
+export const ItemListContainer = () => {
 
  const [products, setProducts] = useState([])
  const {idCategory} = useParams();
 
  useEffect(()=>{
      const promise = obtenerProductos()
-     promise.then(json => {setProducts(json)})
+     promise.then(json => {setProducts(json)
+    })
  }, [products, idCategory])
 
  const obtenerProductos = () =>{
@@ -23,36 +21,28 @@ export const ItemListContainer = ({title}) => {
          setTimeout(()=>{
              if(idCategory){
                  const filteredByCategory = Productos.filter(prod=>prod.idCategory==idCategory)
-                 resolve(filteredByCategory)}
-             else{
-                 resolve(Productos)}
-         }, 2000);
-     })
+                 resolve(filteredByCategory)
+            } else {
+                 resolve(Productos)
+                }
+            }, 2000);
+    })
      return promise
- }
+    }  
 
-
-return (
-    <>
-
-    <div className="bienvenida">
-        <h1> {title} </h1>
-    </div>
-
-
-    {   
-    products?
-        <div className="itemListContainer">
-        <ItemList productsList={products}/>
-        </div>
-
-        :
-        <div className="loader">
-            <Loader type={"balls"} color= {"#0D6EFD"} />
-        </div>
-    }
-
-    </>
-)
+    return (
+        <>
+            {   
+            products?
+                <div className="itemListContainer">
+                <ItemList productsList={products}/>
+                </div>
+                :
+                <div className="loader">
+                    <Loader type={"balls"} color= {"#0D6EFD"} />
+                </div>
+            }
+        </>
+    )
 }
 

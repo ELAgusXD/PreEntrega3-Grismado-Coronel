@@ -2,7 +2,6 @@ import {collection, getDocs} from "firebase/firestore";
 import {useEffect} from 'react';
 import {db} from '../../utils/firebase'
 
-
 export const UsarFirebase = () => {
     useEffect(()=>{
     const getData = async() =>{
@@ -13,5 +12,4 @@ export const UsarFirebase = () => {
     }
     getData();
 }, [])
-
 }

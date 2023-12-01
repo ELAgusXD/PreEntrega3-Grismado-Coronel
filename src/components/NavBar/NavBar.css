@@ -41,3 +41,9 @@ nav div.categorias ul a
     text-decoration: none;
     margin-right: 75px;
 }
+
+.loader-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
